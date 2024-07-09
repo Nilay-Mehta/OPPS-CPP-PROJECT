@@ -1,131 +1,152 @@
-# Event Management System
+# Event Managent
 
-## Overview
-The Event Management System is a simple C++ console application that allows users to manage events. It supports two types of users: managers and regular users. Managers can add, delete events, and change the manager password. Regular users can view all events, search for specific events, and display events by category.
+This is a sofftware for event mangament.
 
-## Features
-- **Manager Login**:
-  - Add new events.
-  - Delete events.
-  - Change manager password.
-- **User Login**:
-  - Display all events.
-  - Display events by category.
-  - Search for specific events by name.
-
-## Requirements
-- C++ Compiler (GCC, Clang, MSVC, etc.)
-
-## How to Run
-1. Compile the code using a C++ compiler:
-   ```bash
-   g++ -o event_manager event_manager.cpp
-
-   ./event_manager
+## My Contribution 
 
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 
-using namespace std;
+ - Event handling
+ - Constructors
 
-Includes necessary libraries and uses the std namespace.
+### 1. Event Handling
 
-##Event Class
-Defines the Event class with attributes: name, date, location, and category. Includes a constructor to initialize these attributes and a display method to print event details.
+1. Made the 'Event' and 'EventManager' class.
 
-##EventManager Class
-Manages a collection of events using a vector. Provides methods to add, delete, display all events, display events by category, and search for specific events.
+### Code - 
 
-##Global Variables and Functions
-Defines global variables for managing events and passwords, and functions for manager and user login.
+    class Event {
+    public:
+    string name;       
+    string date;       
+    string location;   
+    string category;   
 
-##Manager Login
-Handles manager-specific operations like adding, deleting events, and changing the password.
+    Event(string name, string date, string location, string category) {
+        this->name = name;
+        this->date = date;
+        this->location = location;
+        this->category = category;
+    }
 
-##User Login
-Handles user-specific operations like displaying all events, displaying events by category, and searching for specific events.
-
-##Main Function
-Provides the main menu for the Event Management System and handles user input for manager and user logins.
-
-##Usage
-Manager Operations
-Manager Login:
-
-Enter password (default: 1234).
-Choose an operation:
-Add new event
-Delete event
-Change password
-Go back to the main menu
-Adding an Event:
-
-Enter event details: name, date (YYYY-MM-DD), location, and category.
-Deleting an Event:
-
-Enter the name of the event to delete.
-Changing Password:
-
-Enter a new password.
-User Operations
-User Login:
-
-Choose an operation:
-Display all events
-Display events by category
-Search for specific event by name
-Go back to the main menu
-Displaying All Events:
-
-Shows details of all events.
-Displaying Events by Category:
-
-Enter the category to display events.
-Searching for an Event:
-
-Enter the name of the event to search.
-Sample Usage
-Event Management System
-1. Manager login
-2. User login
-3. Exit
-Enter your choice: 1
-Enter your password: 1234
-
-1. Add new event
-2. Delete event
-3. Change password
-4. Go back
-Enter your choice: 1
-Enter event name: Conference
-Enter event date (YYYY-MM-DD): 2024-08-15
-Enter event location: New York
-Enter event category: Business
-Event added successfully!
-
-Event Management System
-1. Manager login
-2. User login
-3. Exit
-Enter your choice: 2
-
-1. Display events
-2. Display events by category
-3. Search event
-4. Go back
-Enter your choice: 1
-
-Event Name: Conference
-Date: 2024-08-15
-Location: New York
-Category: Business
----------------------------------------------
-
-##License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+    void display() const {
+        cout << "Event Name: " << name << endl;
+        cout << "Date: " << date << endl;
+        cout << "Location: " << location << endl;
+        cout << "Category: " << category << endl;
+    }
+};
 
 
-Copy and save this content into a file named `README.md`. This file will provide clear documentation for users who want to understand and use your Event Management System.
+ 2. Explaination : 
+
+
+ Made a class 'Event' to store event details. 
+    Used the string library and used the STL C++ sring function to make it. 
+    A constructor named Event is made to preload variables.
+    A method display is used to get the input.
+    'enter'  the terminal get clear.
+
+
+## 2. Event Manager class
+
+  1. Made the 'EventManager' class.
+
+    
+
+### Code - 
+
+   class EventManager {
+private:
+    vector<Event> events;  
+
+public:
+    
+    void addEvent(const string& name, const string& date, const string& location, const string& category) {
+        events.push_back(Event(name, date, location, category));
+        cout << "Event added successfully!" << endl;
+        getch();
+        system("cls");
+    }
+
+    void deleteEvent(const string& name) {
+        for (auto it = events.begin(); it != events.end(); ++it) {
+            if (it->name == name) {
+                events.erase(it);
+                cout << "---------------------------------------------" << endl;
+                cout << "Event deleted successfully!" << endl;
+                cout << "---------------------------------------------" << endl;
+                getch();
+                system("cls");
+                return;
+            }
+        }
+        cout << "---------------------------------------------" << endl;
+        cout << "Event not found." << endl;
+        cout << "---------------------------------------------" << endl;
+        getch();
+        system("cls");
+    }
+
+    void displayEvents() const {
+        if (events.empty()) {
+            cout << "---------------------------------------------" << endl;
+            cout << "No events available." << endl;
+            cout << "---------------------------------------------" << endl;
+            return;
+        }
+        cout << "---------------------------------------------" << endl;
+        for (const auto& event : events) {
+            event.display();
+            cout << "---------------------------------------------" << endl;
+        }
+        getch();
+        system("cls");
+    }
+
+    void displayEventsByCategory(const string& category) const {
+        bool found = false;
+        cout << "---------------------------------------------" << endl;
+        for (const auto& event : events) {
+            if (event.category == category) {
+                event.display();
+                cout << "---------------------------------------------" << endl;
+                found = true;
+            }
+        }
+        if (!found) {
+            cout << "No events found in the category: " << category << endl;
+            cout << "---------------------------------------------" << endl;
+
+        }
+        getch();
+        system("cls");
+    }
+
+    void searchEvent(const string& name) const {
+        bool found = false;
+        cout << "---------------------------------------------" << endl;
+        for (const auto& event : events) {
+            if (event.name == name) {
+                event.display();
+                cout << "---------------------------------------------" << endl;
+                found = true;
+            }
+        }
+        if (!found) {
+            cout << "Event not found." << endl;
+            cout << "---------------------------------------------" << endl;
+        }
+        getch();
+        system("cls");
+    }
+};
+
+
+2. Explaination : 
+
+    The 'EventManager' class is used to add different functions to event which return to apply features . 
+    1. addEvent
+    2. displayEvents
+    3. searchEvent
+
