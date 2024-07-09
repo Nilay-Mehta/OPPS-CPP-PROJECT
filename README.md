@@ -33,25 +33,25 @@ using namespace std;
 
 Includes necessary libraries and uses the std namespace.
 
-Event Class
+##Event Class
 Defines the Event class with attributes: name, date, location, and category. Includes a constructor to initialize these attributes and a display method to print event details.
 
-EventManager Class
+##EventManager Class
 Manages a collection of events using a vector. Provides methods to add, delete, display all events, display events by category, and search for specific events.
 
-Global Variables and Functions
+##Global Variables and Functions
 Defines global variables for managing events and passwords, and functions for manager and user login.
 
-Manager Login
+##Manager Login
 Handles manager-specific operations like adding, deleting events, and changing the password.
 
-User Login
+##User Login
 Handles user-specific operations like displaying all events, displaying events by category, and searching for specific events.
 
-Main Function
+##Main Function
 Provides the main menu for the Event Management System and handles user input for manager and user logins.
 
-Usage
+##Usage
 Manager Operations
 Manager Login:
 
@@ -124,3 +124,8 @@ Location: New York
 Category: Business
 ---------------------------------------------
 
+##License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+
+Copy and save this content into a file named `README.md`. This file will provide clear documentation for users who want to understand and use your Event Management System.
