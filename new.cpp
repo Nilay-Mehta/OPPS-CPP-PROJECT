@@ -1,16 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
+#include <conio.h>
+#include <cstdlib>
 
 using namespace std;
 
 class Event {
 public:
-    string name;
-    string date;
-    string location;
-    string category;
+    string name;       
+    string date;       
+    string location;   
+    string category;   
 
     Event(string name, string date, string location, string category) {
         this->name = name;
@@ -29,64 +30,93 @@ public:
 
 class EventManager {
 private:
-    vector<Event> events;
+    vector<Event> events;  
 
 public:
+    
     void addEvent(const string& name, const string& date, const string& location, const string& category) {
         events.push_back(Event(name, date, location, category));
         cout << "Event added successfully!" << endl;
+        getch();
+        system("cls");
     }
 
     void deleteEvent(const string& name) {
-        auto it = find_if(events.begin(), events.end(), [&](const Event& e) { return e.name == name; });
-        if (it != events.end()) {
-            events.erase(it);
-            cout << "Event deleted successfully!" << endl;
-        } else {
-            cout << "Event not found." << endl;
+        for (auto it = events.begin(); it != events.end(); ++it) {
+            if (it->name == name) {
+                events.erase(it);
+                cout << "---------------------------------------------" << endl;
+                cout << "Event deleted successfully!" << endl;
+                cout << "---------------------------------------------" << endl;
+                getch();
+                system("cls");
+                return;
+            }
         }
+        cout << "---------------------------------------------" << endl;
+        cout << "Event not found." << endl;
+        cout << "---------------------------------------------" << endl;
+        getch();
+        system("cls");
     }
 
     void displayEvents() const {
         if (events.empty()) {
+            cout << "---------------------------------------------" << endl;
             cout << "No events available." << endl;
+            cout << "---------------------------------------------" << endl;
             return;
         }
-
+        cout << "---------------------------------------------" << endl;
         for (const auto& event : events) {
             event.display();
-            cout << "-------------------------" << endl;
+            cout << "---------------------------------------------" << endl;
         }
+        getch();
+        system("cls");
     }
 
     void displayEventsByCategory(const string& category) const {
         bool found = false;
+        cout << "---------------------------------------------" << endl;
         for (const auto& event : events) {
             if (event.category == category) {
                 event.display();
-                cout << "-------------------------" << endl;
+                cout << "---------------------------------------------" << endl;
                 found = true;
             }
         }
         if (!found) {
             cout << "No events found in the category: " << category << endl;
+            cout << "---------------------------------------------" << endl;
+
         }
+        getch();
+        system("cls");
     }
 
     void searchEvent(const string& name) const {
+        bool found = false;
+        cout << "---------------------------------------------" << endl;
         for (const auto& event : events) {
             if (event.name == name) {
                 event.display();
-                return;
+                cout << "---------------------------------------------" << endl;
+                found = true;
             }
         }
-        cout << "Event not found." << endl;
+        if (!found) {
+            cout << "Event not found." << endl;
+            cout << "---------------------------------------------" << endl;
+        }
+        getch();
+        system("cls");
     }
 };
 
-EventManager manager;
-string name, date, location, category;
-int manager_pass;
+EventManager manager;  
+string name, date, location, category;  
+int manager_pass;  
 
 void manager_login() {
     int choice;
@@ -96,7 +126,8 @@ void manager_login() {
     cout << "4. Go back" << endl;
     cout << "Enter your choice: ";
     cin >> choice;
-    cin.ignore(); // To ignore the newline character left by cin
+    cin.ignore();  
+    system("cls");
     switch (choice) {
         case 1:
             cout << "Enter event name: ";
@@ -112,17 +143,26 @@ void manager_login() {
         case 2:
             cout << "Enter event name to delete: ";
             getline(cin, name);
+            system("cls");
             manager.deleteEvent(name);
             break;
         case 3:
             cout << "Enter new password: ";
             cin >> manager_pass;
+            system("cls");
+            cout << "---------------------------------------------" << endl;
             cout << "Password changed successfully!" << endl;
+            cout << "---------------------------------------------" << endl;
+            getch();
+            system("cls");
             break;
         case 4:
             break;
         default:
+            cout << "---------------------------------------------" << endl;
             cout << "Invalid choice, please try again." << endl;
+            cout << "---------------------------------------------" << endl;
+            break;
     }
 }
 
@@ -132,10 +172,11 @@ void user_login() {
     cout << "1. Display events" << endl;
     cout << "2. Display events by category" << endl;
     cout << "3. Search event" << endl;
-    cout << "4. Go back" << endl;
+    cout << "4. Go back" << endl << endl;
     cout << "Enter your choice: ";
     cin >> choice;
-    cin.ignore(); // To ignore the newline character left by cin
+    cin.ignore();  
+    system("cls");
     switch (choice) {
         case 1:
             manager.displayEvents();
@@ -143,24 +184,33 @@ void user_login() {
         case 2:
             cout << "Enter event category: ";
             getline(cin, category);
+            system("cls");
             manager.displayEventsByCategory(category);
             break;
         case 3:
             cout << "Enter event name to search: ";
             getline(cin, name);
+            system("cls");
             manager.searchEvent(name);
             break;
         case 4:
+            system("cls");
             break;
         default:
+            cout << "---------------------------------------------" << endl;
             cout << "Invalid choice, please try again." << endl;
+            cout << "---------------------------------------------" << endl;
+            getch();
+            system("cls");
     }
 }
 
 int main() {
+    system("cls");
     int choice;
-    manager_pass = 1234;
+    manager_pass = 1234;  
     int pass;
+
     while (true) {
         cout << "Event Management System" << endl;
         cout << "1. Manager login" << endl;
@@ -168,16 +218,23 @@ int main() {
         cout << "3. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-        cin.ignore(); // To ignore the newline character left by cin
+        cin.ignore();  
+        system("cls");
         switch (choice) {
             case 1:
                 cout << "Enter your password: ";
                 cin >> pass;
-                cin.ignore(); // To ignore the newline character left by cin
+                cin.ignore();  
+                system("cls");
                 if (pass == manager_pass)
                     manager_login();
-                else
+                else {
+                    cout << "---------------------------------------------" << endl;
                     cout << "Incorrect password!" << endl;
+                    cout << "---------------------------------------------" << endl;
+                    getch();
+                    system("cls");
+                }
                 break;
             case 2:
                 user_login();
@@ -186,7 +243,11 @@ int main() {
                 cout << "Exiting..." << endl;
                 return 0;
             default:
+                cout << "---------------------------------------------" << endl;
                 cout << "Invalid choice, please try again." << endl;
+                cout << "---------------------------------------------" << endl;
+                getch();
+                system("cls");
         }
     }
 
