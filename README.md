@@ -20,3 +20,107 @@ The Event Management System is a simple C++ console application that allows user
 1. Compile the code using a C++ compiler:
    ```bash
    g++ -o event_manager event_manager.cpp
+
+   ./event_manager
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+Includes necessary libraries and uses the std namespace.
+
+Event Class
+Defines the Event class with attributes: name, date, location, and category. Includes a constructor to initialize these attributes and a display method to print event details.
+
+EventManager Class
+Manages a collection of events using a vector. Provides methods to add, delete, display all events, display events by category, and search for specific events.
+
+Global Variables and Functions
+Defines global variables for managing events and passwords, and functions for manager and user login.
+
+Manager Login
+Handles manager-specific operations like adding, deleting events, and changing the password.
+
+User Login
+Handles user-specific operations like displaying all events, displaying events by category, and searching for specific events.
+
+Main Function
+Provides the main menu for the Event Management System and handles user input for manager and user logins.
+
+Usage
+Manager Operations
+Manager Login:
+
+Enter password (default: 1234).
+Choose an operation:
+Add new event
+Delete event
+Change password
+Go back to the main menu
+Adding an Event:
+
+Enter event details: name, date (YYYY-MM-DD), location, and category.
+Deleting an Event:
+
+Enter the name of the event to delete.
+Changing Password:
+
+Enter a new password.
+User Operations
+User Login:
+
+Choose an operation:
+Display all events
+Display events by category
+Search for specific event by name
+Go back to the main menu
+Displaying All Events:
+
+Shows details of all events.
+Displaying Events by Category:
+
+Enter the category to display events.
+Searching for an Event:
+
+Enter the name of the event to search.
+Sample Usage
+Event Management System
+1. Manager login
+2. User login
+3. Exit
+Enter your choice: 1
+Enter your password: 1234
+
+1. Add new event
+2. Delete event
+3. Change password
+4. Go back
+Enter your choice: 1
+Enter event name: Conference
+Enter event date (YYYY-MM-DD): 2024-08-15
+Enter event location: New York
+Enter event category: Business
+Event added successfully!
+
+Event Management System
+1. Manager login
+2. User login
+3. Exit
+Enter your choice: 2
+
+1. Display events
+2. Display events by category
+3. Search event
+4. Go back
+Enter your choice: 1
+
+Event Name: Conference
+Date: 2024-08-15
+Location: New York
+Category: Business
+---------------------------------------------
+
